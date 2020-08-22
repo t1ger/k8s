@@ -1,0 +1,23 @@
+apiVersion: projectcalico.org/v3
+kind: Node
+metadata:
+  annotations:
+    projectcalico.org/kube-labels: '{"beta.kubernetes.io/arch":"amd64","beta.kubernetes.io/os":"linux","kubernetes.io/arch":"amd64","kubernetes.io/hostname":"node03","kubernetes.io/os":"linux"}'
+  creationTimestamp: null
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    kubernetes.io/arch: amd64
+    kubernetes.io/hostname: node03
+    kubernetes.io/os: linux
+    i-am-a-route-reflector: true
+  name: node03
+spec:
+  bgp:
+    ipv4Address: 192.168.1.104/24
+    ipv4IPIPTunnelAddr: 10.20.186.192
+    routeReflectorClusterID: 224.0.0.1
+  orchRefs:
+  - nodeName: node03
+    orchestrator: k8s
+status: {}
