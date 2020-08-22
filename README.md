@@ -1,6 +1,7 @@
 # k8s
 # install k8s by binary
-.directory
+directory
+```
 ├── etcd
 │   └── etcd.sh
 ├── k8s-master
@@ -73,3 +74,4 @@ After finish install k8s, node list
     └── server.pem
 
 3 directories, 19 files
+```
