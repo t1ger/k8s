@@ -14,7 +14,7 @@ KUBE_APISERVER_OPTS="--logtostderr=false \\
 --allow-privileged=true \\
 --service-cluster-ip-range=10.10.0.0/16 \\
 --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota,NodeRestriction \\
---authorization-mode=RBAC,Node \\
+--authorization-mode=Node,RBAC \\
 --kubelet-https=true \\
 --enable-bootstrap-token-auth=true \\
 --token-auth-file=/opt/kubernetes/cfg/token.csv \\

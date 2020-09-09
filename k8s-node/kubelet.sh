@@ -20,81 +20,42 @@ KUBELET_OPTS="--logtostderr=false \\
 EOF
 
 cat<<EOF>/opt/kubernetes/cfg/kubelet-config.yml
-address: 0.0.0.0
 apiVersion: kubelet.config.k8s.io/v1beta1
 authentication:
   anonymous:
     enabled: false
   webhook:
-    cacheTTL: 2m0s
+    cacheTTL: 0s
     enabled: true
   x509:
     clientCAFile: /opt/kubernetes/ssl/ca.pem
 authorization:
   mode: Webhook
   webhook:
-    cacheAuthorizedTTL: 5m0s
-    cacheUnauthorizedTTL: 30s
-cgroupDriver: cgroupfs
-cgroupsPerQOS: true
+    cacheAuthorizedTTL: 0s
+    cacheUnauthorizedTTL: 0s
 clusterDNS:
 - ${DNS_SERVER_IP}
 clusterDomain: ${CLUETERDOMAIN}
-configMapAndSecretChangeDetectionStrategy: Watch
-containerLogMaxFiles: 5
-containerLogMaxSize: 10Mi
-contentType: application/vnd.kubernetes.protobuf
-cpuCFSQuota: true
-cpuCFSQuotaPeriod: 100ms
-cpuManagerPolicy: none
-cpuManagerReconcilePeriod: 10s
-enableControllerAttachDetach: true
-enableDebuggingHandlers: true
-enforceNodeAllocatable:
-- pods
-eventBurst: 10
-eventRecordQPS: 5
-evictionHard:
-  imagefs.available: 15%
-  memory.available: 100Mi
-  nodefs.available: 10%
-  nodefs.inodesFree: 5%
-evictionPressureTransitionPeriod: 5m0s
-failSwapOn: false
-fileCheckFrequency: 20s
+cpuManagerReconcilePeriod: 0s
+evictionPressureTransitionPeriod: 0s
+fileCheckFrequency: 0s
+healthzBindAddress: 127.0.0.1
+healthzPort: 10248
+httpCheckFrequency: 0s
+imageMinimumGCAge: 0s
+kind: KubeletConfiguration
+nodeStatusReportFrequency: 0s
+nodeStatusUpdateFrequency: 0s
+rotateCertificates: true
+runtimeRequestTimeout: 0s
+staticPodPath: /etc/kubernetes/manifests
+streamingConnectionIdleTimeout: 0s
+syncFrequency: 0s
+volumeStatsAggPeriod: 0s
 featureGates: 
   RotateKubeletServerCertificate: true
   RotateKubeletClientCertificate: true
-hairpinMode: promiscuous-bridge
-healthzBindAddress: 127.0.0.1
-healthzPort: 10248
-httpCheckFrequency: 20s
-imageGCHighThresholdPercent: 85
-imageGCLowThresholdPercent: 80
-imageMinimumGCAge: 2m0s
-iptablesDropBit: 15
-iptablesMasqueradeBit: 14
-kind: KubeletConfiguration
-kubeAPIBurst: 10
-kubeAPIQPS: 5
-makeIPTablesUtilChains: true
-maxOpenFiles: 1000000
-maxPods: 110
-nodeLeaseDurationSeconds: 40
-nodeStatusUpdateFrequency: 10s
-oomScoreAdj: -999
-podPidsLimit: -1
-port: 10250
-registryBurst: 10
-registryPullQPS: 5
-resolvConf: /etc/resolv.conf
-rotateCertificates: true
-runtimeRequestTimeout: 2m0s
-serializeImagePulls: true
-staticPodPath: /etc/kubernetes/manifests
-streamingConnectionIdleTimeout: 4h0m0s
-syncFrequency: 1m0s
-volumeStatsAggPeriod: 1m0s
 EOF
 
 cat<<EOF>/usr/lib/systemd/system/kubelet.service

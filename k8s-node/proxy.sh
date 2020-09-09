@@ -13,31 +13,42 @@ apiVersion: kubeproxy.config.k8s.io/v1alpha1
 bindAddress: 0.0.0.0
 clientConnection:
   acceptContentTypes: ""
-  burst: 10
-  contentType: application/vnd.kubernetes.protobuf
+  burst: 0
+  contentType: ""
   kubeconfig: /opt/kubernetes/cfg/kube-proxy.kubeconfig
-  qps: 5
-clusterCIDR: 10.10.0.0/16
-configSyncPeriod: 15m0s
+  qps: 0
+clusterCIDR: 10.20.0.0/16
+configSyncPeriod: 0s
+conntrack:
+  maxPerCore: null
+  min: null
+  tcpCloseWaitTimeout: null
+  tcpEstablishedTimeout: null
 enableProfiling: false
-healthzBindAddress: 0.0.0.0:10256
+healthzBindAddress: ""
 hostnameOverride: ${HOSTNAME}
 iptables:
   masqueradeAll: false
-  masqueradeBit: 14
+  masqueradeBit: null
   minSyncPeriod: 0s
-  syncPeriod: 30s
+  syncPeriod: 0s
 ipvs:
   excludeCIDRs: null
   minSyncPeriod: 0s
   scheduler: ""
-  syncPeriod: 30s
+  strictARP: false
+  syncPeriod: 0s
 kind: KubeProxyConfiguration
-metricsBindAddress: 0.0.0.0:10249
-mode: ipvs
+metricsBindAddress: ""
+mode: "ipvs"
 nodePortAddresses: null
-oomScoreAdj: -999
+oomScoreAdj: null
 portRange: ""
+udpIdleTimeout: 0s
+winkernel:
+  enableDSR: false
+  networkName: ""
+  sourceVip: ""
 EOF
 
 cat<<EOF>/usr/lib/systemd/system/kube-proxy.service

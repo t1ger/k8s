@@ -3,7 +3,7 @@ cat>token.csv<<EOF
 ${BOOTSTRAP_TOKEN},kubelet-bootstrap,10001,"system:kubelet-bootstrap"
 EOF
 
-export KUBE_APISERVER="https://lb.whistle.ruijie.com.cn:6443"
+export KUBE_APISERVER="https://lb.abc.com.cn:6443"
 
 kubectl config set-cluster kubernetes \
   --certificate-authority=./ca.pem \
