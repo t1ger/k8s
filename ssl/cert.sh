@@ -131,9 +131,22 @@ EOF
 
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy 
 
-cat>metrics-server-csr.json<<EOF
+
+cat <<EOF > /opt/kubernetes/ssl/front-proxy-ca-csr.json
 {
-    "CN": "system:metrics-server",
+    "CN": "kubernetes",
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    }
+}
+EOF
+
+cfssl gencert   -initca front-proxy-ca-csr.json | cfssljson -bare front-proxy-ca
+
+cat>front-proxy-client-csr.json<<EOF
+{
+    "CN": "front-proxy-client",
     "hosts": [],
     "key": {
         "algo": "rsa",
@@ -151,4 +164,4 @@ cat>metrics-server-csr.json<<EOF
 }
 EOF
 
-cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes metrics-server-csr.json | cfssljson -bare metrics-server
+cfssl gencert   -ca=front-proxy-ca.pem  -ca-key=front-proxy-ca-key.pem -config=ca-config.json   -profile=kubernetes   front-proxy-client-csr.json | cfssljson -bare front-proxy-client
